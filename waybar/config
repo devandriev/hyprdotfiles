@@ -5,31 +5,32 @@
     // "width": 1280, // Waybar width
     "spacing": 4, // Gaps between modules (4px)
     // Choose the order of the modules
-    "modules-left": ["wlr/workspaces", "sway/mode", "wlr/scratchpad", "custom/media"],
-    "modules-center": ["hyprland/window"],
-    "modules-right": ["tray", "network", "pulseaudio", "backlight", /*"keyboard-state",*/ "custom/aether", "wlr/language", "battery", "battery#bat2", "clock", "idle_inhibitor", "custom/hyprout"],
-    "wlr/workspaces": {
-         "format": "{icon}",
-         "on-click": "activate",
-         "on-scroll-up": "hyprctl dispatch workspace e+1",
-         "on-scroll-down": "hyprctl dispatch workspace e-1"
-    },
+    "modules-left": ["hyprland/workspaces", "sway/mode", "sway/scratchpad", "custom/media"],
+    "modules-center": ["sway/window"],
+    "modules-right": ["mpd", "idle_inhibitor", "pulseaudio", "network", "cpu", "memory", "temperature", "backlight", "keyboard-state", "sway/language", "battery", "battery#bat2", "clock", "tray"],
+    // "wlr/workspaces": {
+    //     "format": "{icon}",
+    //     "on-click": "activate",
+    //     "on-scroll-up": "hyprctl dispatch workspace e+1",
+    //     "on-scroll-down": "hyprctl dispatch workspace e-1"
+   // },
     // Modules configuration
-    // "sway/workspaces": {
-    //     "disable-scroll": true,
-    //     "all-outputs": true,
-    //     "format": "{name}: {icon}",
-    //     "format-icons": {
-    //         "1": "",
-    //         "2": "",
-    //         "3": "",
-    //         "4": "",
-    //         "5": "",
-    //         "urgent": "",
-    //         "focused": "",
-    //         "default": ""
-    //     }
-    // },
+    "hyprland/workspaces": {
+         "disable-scroll": true,
+         "all-outputs": true,
+         "warp-on-scroll": true,
+         "format": "{name}: {icon}",
+         "format-icons": {
+            // "1": "",
+            // "2": "",
+            // "3": "",
+            // "4": "",
+            // "5": "",
+            "urgent": "",
+            "active": "",
+            "default": ""
+        }
+    },
     "keyboard-state": {
         "numlock": true,
         "capslock": true,
@@ -96,7 +97,7 @@
         "tooltip": false
     },
     "memory": {
-        "format": "{}% "
+        "format": "{}% RAM"
     },
     "temperature": {
         // "thermal-zone": 2,
@@ -108,7 +109,7 @@
     },
     "backlight": {
         // "device": "acpi_video1",
-        "format": "{percent}% ",
+        "format": "{percent}% {icon}",
         "format-icons": ["", "", "", "", "", "", "", "", ""]
     },
     "battery": {
@@ -134,7 +135,7 @@
         "format-ethernet": "{ipaddr}/{cidr} ",
         "tooltip-format": "{ifname} via {gwaddr} ",
         "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "No network ⚠",
+        "format-disconnected": "Disconnected ⚠",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
     },
     "pulseaudio": {
@@ -162,23 +163,11 @@
         "max-length": 40,
         "format-icons": {
             "spotify": "",
-            "default": "🎜"
+            "default": "media"
         },
         "escape": true,
         "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
         // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
-    },
-    // Weather module
-    "custom/aether": {
-        "format": "{}",
-        "exec": "curl wttr.in/pdx?format=\"%l:+%c+%t\n\"",
-        "interval": 6000
-    }, 
-    // Logout button
-    "custom/hyprout": {
-        "format": "",
-        "interval": "once",
-        "on-click": "hyprctl dispatch exit"
     }
 }
 
